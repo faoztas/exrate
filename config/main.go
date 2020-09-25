@@ -12,14 +12,18 @@ var Env Config
 type Config struct {
     EnvType string // production, staging, development
     Adapter struct {
+        CBUAE struct {
+            BaseURL string
+            Timeout int
+        }
         TCMB struct {
             BaseURL string
             Timeout int
         }
         XE struct {
-            Auth struct{
+            Auth struct {
                 AccountID string
-                APIKey string
+                APIKey    string
             }
             BaseURL string
             Timeout int
@@ -34,14 +38,16 @@ type Config struct {
     }
     DB struct {
         Postgres struct {
-            Debug    bool
-            URL      string
-            Host     string
-            Port     int
-            Username string
-            Password string
-            DBName   string
-            HasSSL   bool
+            Debug          bool
+            URL            string
+            Host           string
+            Port           int
+            Username       string
+            Password       string
+            DBName         string
+            HasSSL         bool
+            ClientEncoding string
+            Timeout        int
         }
     }
 }
