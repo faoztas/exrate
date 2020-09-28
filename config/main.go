@@ -37,19 +37,21 @@ type Config struct {
         Format string
     }
     DB struct {
-        Postgres struct {
-            Debug          bool
-            URL            string
-            Host           string
-            Port           int
-            Username       string
-            Password       string
-            DBName         string
-            HasSSL         bool
-            ClientEncoding string
-            Timeout        int
-        }
+        Postgres Postgres
     }
+}
+
+type Postgres struct {
+    Debug          bool
+    Host           string
+    Port           int
+    Username       string
+    Password       string
+    DBName         string
+    HasSSL         bool
+    ClientEncoding string
+    Timeout        int
+    Timezone       string
 }
 
 func Init(path string) {

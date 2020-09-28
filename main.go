@@ -3,7 +3,9 @@ package main
 import (
     "flag"
 
+    "github.com/faoztas/exrate/cache"
     "github.com/faoztas/exrate/config"
+    "github.com/faoztas/exrate/db"
 )
 
 func main()  {
@@ -13,4 +15,10 @@ func main()  {
     flag.Parse()
 
     config.Init(configFilePath)
+
+    db.InitDB()
+    db.Migrate()
+
+    cache.Load()
+
 }
