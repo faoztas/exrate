@@ -7,7 +7,7 @@ import (
 )
 
 type ExchangeRule struct {
-    ID               int             `json:"id" gorm:"type:serial;primary_key;AUTO_INCREMENT"`
+    ID               uint            `json:"id" gorm:"type:serial;primary_key;AUTO_INCREMENT"`
     CreatedAt        *time.Time      `json:"created_at,omitempty" gorm:""`
     UpdatedAt        *time.Time      `json:"updated_at,omitempty" gorm:""`
     SourceCurrency   Currency        `json:"source_currency" gorm:"foreignkey:ID;association_foreignkey:SourceCurrencyID"`
@@ -17,7 +17,7 @@ type ExchangeRule struct {
     BaseCurrency     Currency        `json:"base_currency" gorm:"foreignkey:ID;association_foreignkey:BaseCurrencyID"`
     BaseCurrencyID   string          `json:"-" gorm:"type:varchar(3);not null"`
     CommissionRate   decimal.Decimal `json:"commission_rate" gorm:"type:decimal(3,2);not null"`
-    UpdateFrequency  int             `json:"update_frequency" gorm:"type:numeric;not null"`
+    UpdateFrequency  uint            `json:"update_frequency" gorm:"type:numeric;not null"`
     IsActive         bool            `json:"is_active" gorm:"type:boolean"`
     IsFixed          bool            `json:"is_fixed" gorm:"type:boolean"`
 }

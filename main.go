@@ -17,7 +17,7 @@ func main()  {
     config.Init(configFilePath)
 
     db.InitDB()
-    db.Migrate()
+    db.Migrate(db.DB)
 
     cache.Load()
 

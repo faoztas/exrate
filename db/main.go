@@ -39,7 +39,3 @@ func GetPsqlDSN(psql config.Postgres) string {
         psql.Username, psql.Password, psql.DBName, psql.Port, psql.Host, psql.ClientEncoding, psql.Timeout, psql.Timezone, sslmode)
     return dsn
 }
-
-func Migrate() {
-    // DB.AutoMigrate(&model.Todo{})
-}

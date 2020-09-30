@@ -9,8 +9,8 @@ type Currency struct {
     CreatedAt      *time.Time `json:"created_at,omitempty" gorm:""`
     UpdatedAt      *time.Time `json:"updated_at,omitempty" gorm:""`
     CreatedBy      *User      `json:"created_by,omitempty" gorm:"foreignkey:CreatedByID"`
-    CreatedByID    int        `json:"-" gorm:"type:int"`
-    Version        int        `json:"version" gorm:""`
+    CreatedByID    uint       `json:"-" gorm:"type:int"`
+    Version        uint       `json:"version" gorm:""`
     IsActive       bool       `json:"is_active" gorm:"type:boolean"`
     HasActiveFlow  bool       `json:"has_active_flow" gorm:"type:boolean"`
     CurrencyName   string     `json:"currency_name" gorm:"type:varchar(45)"`

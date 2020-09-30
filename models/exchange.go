@@ -7,7 +7,7 @@ import (
 )
 
 type Exchange struct {
-    ID               int             `json:"id" gorm:"type:serial;primary_key;AUTO_INCREMENT"`
+    ID               uint            `json:"id" gorm:"type:serial;primary_key;AUTO_INCREMENT"`
     CreatedAt        *time.Time      `json:"created_at,omitempty" gorm:""`
     UpdatedAt        *time.Time      `json:"updated_at,omitempty" gorm:""`
     SourceCurrency   Currency        `json:"source_currency" gorm:"foreignkey:ID;association_foreignkey:SourceCurrencyID"`
