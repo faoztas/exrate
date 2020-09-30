@@ -33,9 +33,9 @@ func connectPostgresql(psql config.Postgres) (*gorm.DB, error) {
 func GetPsqlDSN(psql config.Postgres) string {
     sslmode := ""
     if !psql.HasSSL {
-        sslmode = "sslmode=disable"
+        sslmode = "sslmode=disable "
     }
-    dsn := fmt.Sprintf("user=%s password=%s dbname=%s port=%d host=%s client_encoding=%s connect_timeout=%d time_zone=%s %s",
-        psql.Username, psql.Password, psql.DBName, psql.Port, psql.Host, psql.ClientEncoding, psql.Timeout, psql.Timezone, sslmode)
+    dsn := fmt.Sprintf("user=%s password=%s database=%s port=%d %shost=%s client_encoding=%s connect_timeout=%d timezone=%s ",
+        psql.Username, psql.Password, psql.DBName, psql.Port, sslmode, psql.Host, psql.ClientEncoding, psql.Timeout, psql.Timezone)
     return dsn
 }

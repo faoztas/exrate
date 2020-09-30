@@ -12,9 +12,9 @@ func Migrate(db *gorm.DB) {
         &models.Currency{},
         &models.Country{},
         &models.Exchange{},
+        &models.ServiceLog{},
         &models.ExchangeHistory{},
         &models.ExchangeRule{},
-        &models.RawData{},
     }
 
     for _, item := range objects {
