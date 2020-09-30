@@ -4,7 +4,7 @@ import (
     "github.com/shopspring/decimal"
 )
 
-type XE struct {
+type Binding struct {
     Terms     string          `json:"terms"`
     Privacy   string          `json:"privacy"`
     To        string          `json:"to"`

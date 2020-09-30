@@ -4,7 +4,7 @@ import (
     "encoding/xml"
 )
 
-type TCMB struct {
+type Binding struct {
     XMLName  xml.Name `xml:"Tarih_Date"`
     Text     string   `xml:",chardata"`
     Tarih    string   `xml:"Tarih,attr"`
