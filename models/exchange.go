@@ -15,5 +15,5 @@ type Exchange struct {
     TargetCurrency   Currency        `json:"target_currency" gorm:"foreignkey:TargetCurrencyID;association_autoupdate:false;association_autocreate:false"`
     TargetCurrencyID string          `json:"-" gorm:"type:varchar(3);not null"`
     CurrencyRate     decimal.Decimal `json:"currency_rate" gorm:"type:decimal(25,13);not null"`
-    ExchangeRateTime *time.Time      `json:"exchange_rate_time" gorm:""`
+    ExchangeRateTime time.Time       `json:"exchange_rate_time" gorm:""`
 }

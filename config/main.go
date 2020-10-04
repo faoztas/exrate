@@ -10,27 +10,10 @@ import (
 var Env Config
 
 type Config struct {
-    EnvType string // production, staging, development
-    Adapter struct {
-        CBUAE struct {
-            BaseURL string
-            Timeout int
-        }
-        TCMB struct {
-            BaseURL string
-            Timeout int
-        }
-        XE struct {
-            Auth struct {
-                AccountID string
-                APIKey    string
-            }
-            BaseURL string
-            Timeout int
-        }
-    }
+    EnvType      string // production, staging, development
+    Adapters     map[string]Credential
     FeatureFlags struct {
-        Flag string
+        Flag bool
     }
     Logging struct {
         Level  string
@@ -52,6 +35,15 @@ type Postgres struct {
     ClientEncoding string
     Timeout        int
     Timezone       string
+}
+
+type Credential struct {
+    Auth struct {
+        Username string
+        Password string
+    }
+    BaseURL string
+    Timeout int
 }
 
 func Init(path string) {

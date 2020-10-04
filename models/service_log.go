@@ -9,7 +9,8 @@ import (
 type ServiceLog struct {
     ID             int            `json:"id" gorm:"type:serial;primary_key;AUTO_INCREMENT"`
     CreatedAt      time.Time      `json:"created_at,omitempty" gorm:""`
-    Adapter        Adapter        `json:"adapter,omitempty" gorm:"foreignkey:AdapterID"`
+    UUID           string         `json:"uuid" gorm:"type:varchar(36);"`
+    Adapter        Adapter        `json:"adapter,omitempty" gorm:"foreignkey:AdapterID;association_autoupdate:false;association_autocreate:false"`
     AdapterID      int            `json:"adapter_id" gorm:"type:integer"`
     RequestBody    datatypes.JSON `json:"request_body,omitempty" gorm:""`
     ResponseBody   datatypes.JSON `json:"response_body,omitempty" gorm:""`
