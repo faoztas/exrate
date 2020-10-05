@@ -11,14 +11,14 @@ type XE struct {
     logger  *logrus.Entry
 }
 
-func (a XE) LoadCredentials(adapter *models.Adapter, credential *config.Credential) {
+func (a *XE) LoadCredentials(adapter *models.Adapter, credential *config.Credential) {
     panic("implement me")
 }
 
-func (a XE) FetchExchangeRates() error {
+func (a *XE) FetchExchangeRates() {
     panic("implement me")
 }
 
-func (a XE) AddLogFields(fields logrus.Fields) {
+func (a *XE) AddLogFields(fields logrus.Fields) {
     panic("implement me")
 }

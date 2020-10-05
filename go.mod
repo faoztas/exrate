@@ -4,7 +4,7 @@ go 1.15
 
 require (
 	github.com/BurntSushi/toml v0.3.1
-	github.com/basgys/goxml2json v1.1.0 // indirect
+	github.com/basgys/goxml2json v1.1.0
 	github.com/google/uuid v1.1.2
 	github.com/shopspring/decimal v1.2.0
 	github.com/sirupsen/logrus v1.6.0

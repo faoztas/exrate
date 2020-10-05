@@ -13,7 +13,7 @@ type TCMB struct {
     logger         *logrus.Entry
 }
 
-func (a TCMB) LoadCredentials(adapter *models.Adapter, credential *config.Credential) {
+func (a *TCMB) LoadCredentials(adapter *models.Adapter, credential *config.Credential) {
     a.Adapter = adapter
     a.Credential = credential
     a.targetCurrency = "TRY"
@@ -22,6 +22,6 @@ func (a TCMB) LoadCredentials(adapter *models.Adapter, credential *config.Creden
     })
 }
 
-func (a TCMB) AddLogFields(fields logrus.Fields) {
+func (a *TCMB) AddLogFields(fields logrus.Fields) {
     a.logger = a.logger.WithFields(fields)
 }

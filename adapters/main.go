@@ -13,7 +13,7 @@ import (
 
 type AdapterInterface interface {
     LoadCredentials(adapter *models.Adapter, credential *config.Credential)
-    FetchExchangeRates() error
+    FetchExchangeRates()
     AddLogFields(fields logrus.Fields)
 }
 

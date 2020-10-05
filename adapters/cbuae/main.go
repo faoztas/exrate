@@ -11,14 +11,14 @@ type CBUAE struct {
     logger  *logrus.Entry
 }
 
-func (a CBUAE) LoadCredentials(adapter *models.Adapter, credential *config.Credential) {
+func (a *CBUAE) LoadCredentials(adapter *models.Adapter, credential *config.Credential) {
     panic("implement me")
 }
 
-func (a CBUAE) FetchExchangeRates() error {
+func (a *CBUAE) FetchExchangeRates() {
     panic("implement me")
 }
 
-func (a CBUAE) AddLogFields(fields logrus.Fields) {
+func (a *CBUAE) AddLogFields(fields logrus.Fields) {
     panic("implement me")
 }

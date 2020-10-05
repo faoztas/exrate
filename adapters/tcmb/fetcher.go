@@ -13,7 +13,7 @@ import (
     "github.com/shopspring/decimal"
 )
 
-func (a TCMB) FetchExchangeRates() error {
+func (a *TCMB) FetchExchangeRates() {
     request := utils.R{
         Method:  http.MethodGet,
         Timeout: &a.Credential.Timeout,
@@ -29,19 +29,20 @@ func (a TCMB) FetchExchangeRates() error {
         UUID:           uuid.New().String(),
         AdapterID:      a.Adapter.ID,
         RequestBody:    utils.ToJson(request.Body),
-        ResponseBody:   body,
+        ResponseBody:   utils.Xml2Json(body),
         ExternalData:   utils.ToJson(request.Header),
         LogType:        utils.AdapterTCMB,
         RequestDate:    requestTime,
         ResponseDate:   responseTime,
-        HTTPStatus:     response.StatusCode,
+        HTTPStatus:     utils.ToHttpStatusCode(response),
         HTTPMethod:     request.Method,
         DestinationURL: request.URL,
         IsSuccess:      false,
     }
     if err != nil {
         db.DB.Save(&serviceLog)
-        return fmt.Errorf("%v Request: %+v Response: %+v", err, request, response)
+        a.logger.Errorf("%v Request: %+v Response: %+v", err, request, response)
+        return
     }
     serviceLog.IsSuccess = true
     db.DB.Save(&serviceLog)
@@ -49,10 +50,9 @@ func (a TCMB) FetchExchangeRates() error {
     rowData := new(Binding)
     err = xml.Unmarshal(body, &rowData)
     if err != nil {
-        return fmt.Errorf("Unmarshalling Error: %v ", err)
+        a.logger.Errorf("Unmarshalling Error: %v ", err)
+        return
     }
-
-    var insertData []interface{}
 
     for k := range rowData.Currency {
         if rowData.Currency[k].CurrencyCode == "XDR" {
@@ -82,17 +82,14 @@ func (a TCMB) FetchExchangeRates() error {
         }
         rate := forexBuying.Add(forexSelling).Div(decimal.NewFromInt(2))
 
-        insertData = append(insertData, models.ExchangeHistory{
+        if err := db.DB.Create(&models.ExchangeHistory{
             SourceCurrencyID: rowData.Currency[k].CurrencyCode,
             TargetCurrencyID: a.targetCurrency,
             CurrencyRate:     utils.DecimalToFixed(rate, 13),
             ServiceLogID:     serviceLog.ID,
-        })
+        }).Error; err != nil {
+            a.logger.Errorf("Insert Error: %v ", err)
+            continue
+        }
     }
-
-    if err := db.DB.Create(insertData).Error; err != nil {
-        return fmt.Errorf("Insert Error: %v ", err)
-    }
-
-    return nil
 }
