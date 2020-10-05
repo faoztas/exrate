@@ -13,7 +13,7 @@ import (
     "github.com/shopspring/decimal"
 )
 
-func (a TCMB) fetcher() error {
+func (a TCMB) FetchExchangeRates() error {
     request := utils.R{
         Method:  http.MethodGet,
         Timeout: &a.Credential.Timeout,

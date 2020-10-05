@@ -22,13 +22,6 @@ func (a TCMB) LoadCredentials(adapter *models.Adapter, credential *config.Creden
     })
 }
 
-func (a TCMB) FetchExchangeRates() error {
-    if err := a.fetcher(); err != nil {
-        return err
-    }
-    return nil
-}
-
 func (a TCMB) AddLogFields(fields logrus.Fields) {
     a.logger = a.logger.WithFields(fields)
 }
